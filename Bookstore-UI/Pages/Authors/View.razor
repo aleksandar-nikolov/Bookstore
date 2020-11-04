@@ -3,17 +3,15 @@
 @inject IAuthorRepository _repo
 @inject NavigationManager _navMan
 
-<h3>view</h3>
+<h3>View Author Details</h3>
 
 @if (Model == null)
 {
-    <div class="alert alert-dismissible alert-secondary">
-        Loading...
-    </div>
+    <LoadingMessage Message="Loading" />
 }
 else
 {
-    <div class="col-md-4">
+    <div class="col-md-5">
         <h4>Author Details</h4>
         <table class="table table-responsive">
             <tr>
@@ -29,7 +27,7 @@ else
                 <td>@Model.Bio</td>
             </tr>
         </table>
-        <br/>
+        <br />
         @if (Model.Books == null || !Model.Books.Any())
         {
             <div class="alert alert-dismissible alert-secondary">
@@ -52,9 +50,15 @@ else
         }
     </div>
 }
-<br/>
+<br />
 <button class="btn btn-secondary" @onclick="BackToList">
     <span class="oi oi-media-skip-backward">Back to list</span>
+</button>
+<а href="/authors/edit/@Model.Id" class="btn btn-secondary">
+    <span class="oi oi-pencil">Edit</span>
+</а>
+<button class="btn btn-secondary" @onclick="Edit">
+    <span class="oi oi-pencil">Edit</span>
 </button>
 
 
@@ -73,6 +77,11 @@ else
     private void BackToList()
     {
         _navMan.NavigateTo("/authors/");
+    } 
+    
+    private void Edit()
+    {
+        _navMan.NavigateTo($"/authors/edit/{Id}");
     }
 
 }
