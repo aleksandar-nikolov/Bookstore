@@ -50,7 +50,7 @@ namespace Bookstore_UI.Services
                 return null;
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}{id}");
             var client = await GetAuthenticatedClient();
             HttpResponseMessage response = await client.SendAsync(request);
 
