@@ -83,7 +83,7 @@ namespace Bookstore_UI.Services
             return false;
         }
 
-        public async Task<bool> Update(string url, T obj)
+        public async Task<bool> Update(string url, T obj, int id)
         {
             //if (id < 1)
             //{
@@ -95,7 +95,7 @@ namespace Bookstore_UI.Services
                 return false;
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Put, url);
+            var request = new HttpRequestMessage(HttpMethod.Put, url + id);
             request.Content = new StringContent(JsonConvert.SerializeObject(obj), UsedEncoding, MediaType);
             var client = await GetAuthenticatedClient();
             HttpResponseMessage response = await client.SendAsync(request);

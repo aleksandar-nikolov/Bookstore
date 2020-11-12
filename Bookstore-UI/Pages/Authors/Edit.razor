@@ -63,7 +63,7 @@ else
 
     private async Task EditAuthor()
     {
-        bool isSuccess = await _repo.Update($"{Endpoints.AuthorsEndpoint}{Id}", Model);
+        bool isSuccess = await _repo.Update($"{Endpoints.AuthorsEndpoint}", Model, Model.Id);
         if (!isSuccess)
         {
             _isFailed = true;
