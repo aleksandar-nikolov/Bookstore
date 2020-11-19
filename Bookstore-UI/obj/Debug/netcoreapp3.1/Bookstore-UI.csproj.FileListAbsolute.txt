@@ -102,7 +102,6 @@ C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\bin\Debug\netco
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\bin\Debug\netcoreapp3.1\Microsoft.JSInterop.dll
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Bookstore-UI.csprojAssemblyReference.cache
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Bookstore-UI.AssemblyInfoInputs.cache
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Bookstore-UI.AssemblyInfo.cs
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Bookstore-UI.csproj.CoreCompileInputs.cache
@@ -161,3 +160,12 @@ C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netco
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Shared\ErrorMessage.razor.g.cs
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Authors\Create.razor.g.cs
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Pages\Authors\Create.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Books\Index.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Pages\Books\Index.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Books\View.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Pages\Books\View.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Books\Create.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Books\Edit.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Pages\Books\Create.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Pages\Books\Edit.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Bookstore-UI.csprojAssemblyReference.cache

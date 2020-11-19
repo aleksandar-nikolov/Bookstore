@@ -115,7 +115,7 @@ namespace BookStore_API.Controllers
                 _configuration["Jwt:Issuer"],
                 claims,
                 null,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddDays(2),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

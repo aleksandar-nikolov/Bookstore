@@ -1,0 +1,90 @@
+﻿@page "/books/create/"
+@using Bookstore_UI.Static
+@attribute [Authorize(Roles = "Administrator")]
+@inject IBookRepository _repo
+@inject IAuthorRepository _authorRepo
+@inject NavigationManager _navMan
+
+<h3 class="card-title">Create Author</h3>
+<hr/>
+@if (_isFailed)
+{
+    <div class="alert alert-danger">
+        <p>Something went wrong</p>
+    </div>
+}
+
+@if (Model == null)
+{
+    <LoadingMessage Message="Loading" />
+}
+else
+{
+    <EditForm Model="@Model" OnValidSubmit="CreateBook">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group">
+            <label for="title">Title</label>
+            <InputText @bind-Value="Model.Title" class="form-control" id="title" />
+        </div>
+        <div class="form-group">
+            <label for="isbn">ISBN</label>
+            <InputNumber @bind-Value="Model.Isbn" class="form-control" id="isbn" />
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <select @bind="Model.AuthorId">
+                <option value="-- select author --"></option>
+                @if (Authors != null)
+                {
+                    foreach (var author in Authors)
+                    {
+                        <option value="@author.Id">@author.Firstname @author.Lastname</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group"></div>
+        <button class="btn btn-primary" type="submit">
+            <span class="oi oi-pencil"></span>
+            Submit Changes
+        </button>
+        <button class="btn btn-secondary" @onclick="BackToList">
+            <span class="oi oi-media-skip-backward">Back to list</span>
+        </button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private Book Model = new Book();
+
+    private IList<Author> Authors;
+
+    private bool _isFailed = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Authors = await _authorRepo.Get(Endpoints.AuthorsEndpoint);
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/books/");
+    }
+
+    private async Task CreateBook()
+    {
+        bool isSuccess = await _repo.Create($"{Endpoints.BooksEndpoint}", Model);
+        if (!isSuccess)
+        {
+            _isFailed = true;
+        }
+        else
+        {
+            _navMan.NavigateTo("/books/");
+        }
+    }
+}
