@@ -1,10 +1,11 @@
-﻿@page "/authors/edit/{id}"
+﻿@page "/authors/create/"
 @using Bookstore_UI.Static
 @attribute [Authorize(Roles = "Administrator")]
 @inject IAuthorRepository _repo
 @inject NavigationManager _navMan
 
-<h3 class="card-title">Edit Author</h3>
+<h3 class="card-title">Create Author</h3>
+<hr/>
 @if (_isFailed)
 {
     <div class="alert alert-danger">
@@ -18,20 +19,20 @@
 }
 else
 {
-    <EditForm Model="@Model" OnValidSubmit="EditAuthor">
-        <DataAnnotationsValidator/>
-        <ValidationSummary/>
+    <EditForm Model="@Model" OnValidSubmit="CreateAuthor">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
         <div class="form-group">
             <label for="firstname">First Name</label>
-            <InputText @bind-Value="Model.Firstname" class="form-control" id="firstname"/>
+            <InputText @bind-Value="Model.Firstname" class="form-control" id="firstname" />
         </div>
         <div class="form-group">
             <label for="lastname">Last Name</label>
-            <InputText @bind-Value="Model.Lastname" class="form-control" id="lastname"/>
+            <InputText @bind-Value="Model.Lastname" class="form-control" id="lastname" />
         </div>
         <div class="form-group">
             <label for="Bio">Biography</label>
-            <InputText @bind-Value="Model.Bio" class="form-control" id="bio"/>
+            <InputText @bind-Value="Model.Bio" class="form-control" id="bio" />
         </div>
         <button class="btn btn-primary" type="submit">
             <span class="oi oi-pencil"></span>
@@ -51,20 +52,14 @@ else
 
     private bool _isFailed = false;
 
-    protected override async Task OnInitializedAsync()
-    {
-        int id = int.Parse(Id);
-        Model = await _repo.Get(Endpoints.AuthorsEndpoint, id);
-    }
-
     private void BackToList()
     {
         _navMan.NavigateTo("/authors/");
     }
 
-    private async Task EditAuthor()
+    private async Task CreateAuthor()
     {
-        bool isSuccess = await _repo.Update($"{Endpoints.AuthorsEndpoint}", Model, Model.Id);
+        bool isSuccess = await _repo.Create($"{Endpoints.AuthorsEndpoint}", Model);
         if (!isSuccess)
         {
             _isFailed = true;

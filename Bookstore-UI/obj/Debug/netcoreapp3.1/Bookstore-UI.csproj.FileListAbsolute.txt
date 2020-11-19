@@ -159,3 +159,5 @@ C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netco
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Pages\Authors\Delete.razor.g.cs
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\ErrorMessage.razor.g.cs
 C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Shared\ErrorMessage.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Authors\Create.razor.g.cs
+C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\obj\Debug\netcoreapp3.1\Razor\Pages\Authors\Create.razor.g.cs

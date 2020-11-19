@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Sna+xkM66LLcAo9aXX5VXLueX0CM1htBBjuYo8+Os8pwktG/Jm12IhxgpG37wX+j6Fb2Hl0Z0Jp9SZC8lf4ngg==",
+  "dgSpecHash": "MedLdleH90lFsZv1q8likcuERakVJwNSmSfYemenvXrdFL/IOHIRyW53e5xEJ4eF8ju823I1C1HovkdqDfwBhA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Aleksandar Nikolov\\source\\repos\\Bookstrore\\BookStore-API\\BookStore-API.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,8 @@
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.8\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.8.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.8\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.8.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.8\\microsoft.aspnetcore.identity.ui.3.1.8.nupkg.sha512",
+    "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.3\\microsoft.aspnetcore.jsonpatch.3.1.3.nupkg.sha512",
+    "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.3\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.3.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -49,6 +51,7 @@
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\nlog\\4.7.4\\nlog.4.7.4.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\nlog.extensions.logging\\1.6.5\\nlog.extensions.logging.1.6.5.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",

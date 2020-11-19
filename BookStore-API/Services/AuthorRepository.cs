@@ -20,5 +20,16 @@ namespace BookStore_API.Servicces
             return await Db.Authors.AnyAsync(_ => _.Id == id);
         }
 
+        public new async Task<IList<Author>> FindAll()
+        {
+            var entities = await Db.Authors.Include(a => a.Books).ToListAsync();
+            return entities;
+        }
+
+        public new async Task<Author> FindById(int id)
+        {
+            var entity = await Db.Authors.Include(a => a.Books).FirstOrDefaultAsync(a => a.Id == id);
+            return entity;
+        }
     }
 }

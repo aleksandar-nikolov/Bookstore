@@ -94,7 +94,8 @@ namespace BookStore_API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Customer")]
         public async Task<IActionResult> Create([FromBody] AuthorCreateDTO authorDTO)
         {
             if (authorDTO == null)
