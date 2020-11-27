@@ -1,12 +1,19 @@
 ﻿@page "/books/create/"
+@using System.IO
 @using Bookstore_UI.Static
+@using BlazorInputFile
 @attribute [Authorize(Roles = "Administrator")]
 @inject IBookRepository _repo
 @inject IAuthorRepository _authorRepo
 @inject NavigationManager _navMan
+@inject IFileUpload _fileUpload
 
-<h3 class="card-title">Create Author</h3>
+<h3 class="card-title">Create Book</h3>
 <hr/>
+@if (!isSuccess)
+{
+    <ErrorMessage Message="Something went wrong" />
+}
 @if (_isFailed)
 {
     <div class="alert alert-danger">
@@ -29,11 +36,11 @@ else
         </div>
         <div class="form-group">
             <label for="isbn">ISBN</label>
-            <InputNumber @bind-Value="Model.Isbn" class="form-control" id="isbn" />
+            <InputText @bind-Value="Model.Isbn" class="form-control" id="isbn" />
         </div>
         <div class="form-group">
-            <label for="author">Author</label>
-            <select @bind="Model.AuthorId">
+            <label for="author">Authors</label>
+            <select @bind="Model.AuthorId" class="form-control" id="author">
                 <option value="-- select author --"></option>
                 @if (Authors != null)
                 {
@@ -44,7 +51,18 @@ else
                 }
             </select>
         </div>
-        <div class="form-group"></div>
+        <div class="form-group">
+            <label for="bookcover">Book Cover Photo</label>
+            @*<InputFile OnChange="HandleFileSelection"></InputFile*@
+            @if (_isInvalidFileType)
+            {
+                <ErrorMessage Message="Not supported image"/>
+            }
+            @if (!string.IsNullOrWhiteSpace(_imageDataUrl))
+            {
+                <img src="@_imageDataUrl" style="height: 100px;width: 100px"/>
+            }
+        </div>
         <button class="btn btn-primary" type="submit">
             <span class="oi oi-pencil"></span>
             Submit Changes
@@ -63,7 +81,15 @@ else
 
     private IList<Author> Authors;
 
+    private IFileListEntry file;
+
+    private string _imageDataUrl;
+
+    private bool isSuccess = true;
+
     private bool _isFailed = false;
+
+    private bool _isInvalidFileType = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -77,6 +103,18 @@ else
 
     private async Task CreateBook()
     {
+        if (_isInvalidFileType)
+        {
+            return;
+        }
+
+        var ext = Path.GetExtension(file.Name);
+        var picId = Guid.NewGuid().ToString().Replace("-", string.Empty);
+        var picName = $"{picId}{ext}";
+
+        Model.Image = picName;
+        await _fileUpload.UploadFile(file, picName);
+
         bool isSuccess = await _repo.Create($"{Endpoints.BooksEndpoint}", Model);
         if (!isSuccess)
         {
@@ -85,6 +123,45 @@ else
         else
         {
             _navMan.NavigateTo("/books/");
+        }
+    }
+
+    private async Task HandleFileSelection(IFileListEntry[] files)
+    {
+        file = files.FirstOrDefault();
+        if (file != null)
+        {
+            var name = file.Name;
+            if (name.EndsWith("jpg", StringComparison.InvariantCultureIgnoreCase) ||
+                name.EndsWith("jpeg", StringComparison.InvariantCultureIgnoreCase) ||
+                name.EndsWith("png", StringComparison.InvariantCultureIgnoreCase))
+            {
+                try
+                {
+                    //var ms = new MemoryStream();
+                    //await file.Data.CopyToAsync(ms);
+
+                    //var reader = new StreamReader(file.Data);
+                    //var imageBase64Data = Convert.ToBase64String(ms.ToArray());
+                    //_imageDataUrl = string.Format("data:image/png;base64,{0}", imageBase64Data);
+
+                    byte[] imageArray = System.IO.File.ReadAllBytes(name);
+                    string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+                    _imageDataUrl = String.Format("data:image/png;base64,{0}", base64ImageRepresentation);
+
+                    _isInvalidFileType = false;
+                }
+                catch
+                {
+                    _isInvalidFileType = true;
+                    _imageDataUrl = string.Empty;
+                }
+            }
+            else
+            {
+                _isInvalidFileType = true;
+                _imageDataUrl = string.Empty;
+            }
         }
     }
 }

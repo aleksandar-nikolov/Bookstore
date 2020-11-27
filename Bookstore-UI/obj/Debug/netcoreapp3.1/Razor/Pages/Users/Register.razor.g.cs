@@ -73,6 +73,13 @@ using Bookstore_UI.Shared;
 #line hidden
 #nullable disable
 #nullable restore
+#line 12 "C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\_Imports.razor"
+using BlazorInputFile;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 2 "C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\Pages\Users\Register.razor"
 using Bookstore_UI.Contracts;
 

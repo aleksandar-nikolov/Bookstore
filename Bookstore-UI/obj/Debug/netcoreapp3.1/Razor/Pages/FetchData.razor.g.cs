@@ -87,6 +87,13 @@ using Bookstore_UI.Models;
 #line hidden
 #nullable disable
 #nullable restore
+#line 12 "C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\_Imports.razor"
+using BlazorInputFile;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 3 "C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\Pages\FetchData.razor"
 using System.Threading;
 

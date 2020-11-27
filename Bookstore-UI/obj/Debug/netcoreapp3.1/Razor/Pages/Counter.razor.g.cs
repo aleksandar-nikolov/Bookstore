@@ -86,6 +86,13 @@ using Bookstore_UI.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 12 "C:\Users\Aleksandar Nikolov\source\repos\Bookstrore\Bookstore-UI\_Imports.razor"
+using BlazorInputFile;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/counter")]
     public partial class Counter : Microsoft.AspNetCore.Components.ComponentBase
     {
