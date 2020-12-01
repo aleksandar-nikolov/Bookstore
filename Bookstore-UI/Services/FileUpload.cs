@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using BlazorInputFile;
 using Bookstore_UI.Contracts;
 using Microsoft.AspNetCore.Hosting;
 
@@ -19,24 +15,18 @@ namespace Bookstore_UI.Services
             _env = env;
         }
 
-        public async Task UploadFile(IFileListEntry file, string picName)
+        public async Task UploadFile(Stream file, string picName)
         {
             try
             {
-                var ms = new MemoryStream();
-                await file.Data.CopyToAsync(ms);
-
                 var path = $"{_env.WebRootPath}\\uploads\\{picName}";
 
-                using (FileStream fs = new FileStream(path, FileMode.Create))
-                {
-                    ms.WriteTo(fs);
-                }
-
+                await using FileStream fs = new FileStream(path, FileMode.Create);
+                file.Seek(0, SeekOrigin.Begin);
+                await file.CopyToAsync(fs);
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

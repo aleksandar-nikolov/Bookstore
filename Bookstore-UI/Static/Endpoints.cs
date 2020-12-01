@@ -7,7 +7,11 @@ namespace Bookstore_UI.Static
 {
     public static class Endpoints
     {
+#if DEBUG
         public static string BaseUrl = "https://localhost:44304/";
+#else
+    public static string BaseUrl = "";
+#endif
         public static string BaseApiUrl = $"{BaseUrl}api/";
         public static string AuthorsEndpoint = $"{BaseApiUrl}authors/";
         public static string BooksEndpoint = $"{BaseApiUrl}books/";

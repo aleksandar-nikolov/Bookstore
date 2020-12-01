@@ -1,8 +1,7 @@
 ﻿@page "/books/create/"
 @using System.IO
 @using Bookstore_UI.Static
-@using BlazorInputFile
-@attribute [Authorize(Roles = "Administrator")]
+@attribute [Authorize(Roles = "Administrator, Customer")]
 @inject IBookRepository _repo
 @inject IAuthorRepository _authorRepo
 @inject NavigationManager _navMan
@@ -53,7 +52,8 @@ else
         </div>
         <div class="form-group">
             <label for="bookcover">Book Cover Photo</label>
-            @*<InputFile OnChange="HandleFileSelection"></InputFile*@
+            @*<InputFile OnChange="HandleFileSelection" multiple></InputFile>*@
+            <InputFile OnChange="HandleFileSelection"></InputFile>
             @if (_isInvalidFileType)
             {
                 <ErrorMessage Message="Not supported image"/>
@@ -81,7 +81,7 @@ else
 
     private IList<Author> Authors;
 
-    private IFileListEntry file;
+    private IBrowserFile _file;
 
     private string _imageDataUrl;
 
@@ -108,12 +108,16 @@ else
             return;
         }
 
-        var ext = Path.GetExtension(file.Name);
-        var picId = Guid.NewGuid().ToString().Replace("-", string.Empty);
-        var picName = $"{picId}{ext}";
+        if (_file != null)
+        {
 
-        Model.Image = picName;
-        await _fileUpload.UploadFile(file, picName);
+            var ext = Path.GetExtension(_file.Name);
+            var picId = Guid.NewGuid().ToString().Replace("-", string.Empty);
+            var picName = $"{picId}{ext}";
+
+            Model.Image = picName;
+            await _fileUpload.UploadFile(_file.OpenReadStream(), picName);
+        }
 
         bool isSuccess = await _repo.Create($"{Endpoints.BooksEndpoint}", Model);
         if (!isSuccess)
@@ -126,28 +130,26 @@ else
         }
     }
 
-    private async Task HandleFileSelection(IFileListEntry[] files)
+    private async Task HandleFileSelection(InputFileChangeEventArgs e)
     {
-        file = files.FirstOrDefault();
-        if (file != null)
+        //file = e.GetMultipleFiles(7);
+        _file = e.File;
+        if (_file != null)
         {
-            var name = file.Name;
-            if (name.EndsWith("jpg", StringComparison.InvariantCultureIgnoreCase) ||
-                name.EndsWith("jpeg", StringComparison.InvariantCultureIgnoreCase) ||
-                name.EndsWith("png", StringComparison.InvariantCultureIgnoreCase))
+            var name = _file.Name;
+            if (Path.GetExtension(name).ToLower() == "jpg" ||
+            Path.GetExtension(name).ToLower() == "jpeg" ||
+            Path.GetExtension(name).ToLower() == "png")
             {
                 try
                 {
-                    //var ms = new MemoryStream();
-                    //await file.Data.CopyToAsync(ms);
+                    var resizedImageFile = await _file.RequestImageFileAsync("image/png", 100, 100);
 
-                    //var reader = new StreamReader(file.Data);
-                    //var imageBase64Data = Convert.ToBase64String(ms.ToArray());
-                    //_imageDataUrl = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                    var buffer = new byte[resizedImageFile.Size];
+                    await resizedImageFile.OpenReadStream().ReadAsync(buffer);
 
-                    byte[] imageArray = System.IO.File.ReadAllBytes(name);
-                    string base64ImageRepresentation = Convert.ToBase64String(imageArray);
-                    _imageDataUrl = String.Format("data:image/png;base64,{0}", base64ImageRepresentation);
+                    string base64ImageRepresentation = Convert.ToBase64String(buffer);
+                    _imageDataUrl = $"data:image/png;base64,{base64ImageRepresentation}";
 
                     _isInvalidFileType = false;
                 }

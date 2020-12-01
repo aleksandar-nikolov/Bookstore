@@ -67,6 +67,9 @@ namespace Bookstore_UI
 
             app.UseEndpoints(endpoints =>
             {
+                //NOTE
+                endpoints.MapDefaultControllerRoute();
+
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });

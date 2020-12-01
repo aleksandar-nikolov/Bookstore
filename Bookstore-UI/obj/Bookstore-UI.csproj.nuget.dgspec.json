@@ -47,10 +47,6 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "BlazorInputFile": {
-              "target": "Package",
-              "version": "[0.2.0, )"
-            },
             "Blazored.LocalStorage": {
               "target": "Package",
               "version": "[3.0.0, )"
