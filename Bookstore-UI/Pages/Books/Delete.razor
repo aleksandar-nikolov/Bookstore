@@ -3,7 +3,7 @@
 @using Bookstore_UI.Static
 @using Microsoft.AspNetCore.Http
 @attribute [Authorize]
-
+@inject IFileUpload _fileUpload
 @inject IBookRepository _repo
 @inject NavigationManager _navMan
 
@@ -98,6 +98,7 @@ else
 
     private async Task DeleteAuthor()
     {
+
         bool isSuccess = await _repo.Delete(Endpoints.BooksEndpoint, Model.Id);
         if (!isSuccess)
         {
@@ -105,6 +106,7 @@ else
         }
         else
         {
+            _fileUpload.RemoveFile(Model.Image);
             _navMan.NavigateTo("/books/");
         }
     }
