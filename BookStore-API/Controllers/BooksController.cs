@@ -6,6 +6,7 @@ using AutoMapper;
 using BookStore_API.Contracts;
 using BookStore_API.Data;
 using BookStore_API.Mappings.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -128,7 +129,8 @@ namespace BookStore_API.Controllers
         /// <param name="bookDto"></param>
         /// <returns></returns>
         // TODO
-        [HttpPut("id:int")]
+        [HttpPut("{id:int}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Update(int id, [FromBody] BookUpdateDTO bookDto)
         {
             LogEndpointAttempt();
@@ -177,6 +179,7 @@ namespace BookStore_API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         //todo
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             LogEndpointAttempt();

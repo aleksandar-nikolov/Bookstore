@@ -8,6 +8,6 @@ namespace Bookstore_UI.Contracts
     {
         public Task UploadFile(Stream file, string picName);
 
-        //public Task RemoveFile(string picName);
+        public void RemoveFile(string picName);
     }
 }

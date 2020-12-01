@@ -30,5 +30,14 @@ namespace Bookstore_UI.Services
                 throw;
             }
         }
+
+        public void RemoveFile(string picName)
+        {
+            var path = $"{_env.WebRootPath}\\uploads\\{picName}";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
     }
 }
