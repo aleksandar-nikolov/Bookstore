@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "L9nStTYbEF33y39na0oG2BNJTXtsXGrVuDVYkQKS5nkIJdimcBHk3iv3A0A8EEI36Y2oC24rz/nGxvAjic5BOA==",
+  "dgSpecHash": "sf1mV6AnDZ2++ScDfbhXseMLvsEuD7dhgyA3DiFpLo/ChPJbxjPfAfXg3y2hTKKNiKS1mAwN2znLfUEbCsx0Lw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Aleksandar Nikolov\\source\\repos\\Bookstrore\\Bookstore-UI\\Bookstore-UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\blazored.localstorage\\3.0.0\\blazored.localstorage.3.0.0.nupkg.sha512",
+    "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\blazored.toast\\3.1.2\\blazored.toast.3.1.2.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.6\\microsoft.aspnetcore.authorization.3.1.6.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.aspnetcore.components\\3.1.6\\microsoft.aspnetcore.components.3.1.6.nupkg.sha512",
     "C:\\Users\\Aleksandar Nikolov\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\3.1.6\\microsoft.aspnetcore.components.analyzers.3.1.6.nupkg.sha512",

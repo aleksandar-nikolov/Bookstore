@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using Blazored.Toast;
 using Bookstore_UI.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -35,6 +36,7 @@ namespace Bookstore_UI
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddBlazoredLocalStorage();
+            services.AddBlazoredToast();
             services.AddScoped<JwtSecurityTokenHandler>();
             services.AddHttpClient();
             services.AddScoped<ApiAuthenticationStateProvider>();
