@@ -1,6 +1,6 @@
 ﻿@page "/books/create/"
 @using System.IO
-@using Bookstore_UI.Static
+@using BookStore_UI.Static
 @attribute [Authorize(Roles = "Administrator, Customer")]
 @inject IBookRepository _repo
 @inject IAuthorRepository _authorRepo

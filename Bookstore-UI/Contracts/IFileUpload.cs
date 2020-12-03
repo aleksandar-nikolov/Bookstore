@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace Bookstore_UI.Contracts
+namespace BookStore_UI.Contracts
 {
     public interface IFileUpload
     {

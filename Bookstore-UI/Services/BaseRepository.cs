@@ -7,11 +7,11 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using Bookstore_UI.Contracts;
-using Bookstore_UI.Static;
+using BookStore_UI.Contracts;
+using BookStore_UI.Static;
 using Newtonsoft.Json;
 
-namespace Bookstore_UI.Services
+namespace BookStore_UI.Services
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {

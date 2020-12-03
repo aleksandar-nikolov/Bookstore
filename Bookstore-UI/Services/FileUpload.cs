@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Bookstore_UI.Contracts;
+using BookStore_UI.Contracts;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Bookstore_UI.Services
+namespace BookStore_UI.Services
 {
     public class FileUpload : IFileUpload
     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace Bookstore_UI.Providers
+namespace BookStore_UI.Providers
 {
     public class ApiAuthenticationStateProvider : AuthenticationStateProvider
     {

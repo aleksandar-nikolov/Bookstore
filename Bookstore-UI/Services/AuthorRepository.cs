@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using Bookstore_UI.Contracts;
-using Bookstore_UI.Models;
+using BookStore_UI.Contracts;
+using BookStore_UI.Models;
 
-namespace Bookstore_UI.Services
+namespace BookStore_UI.Services
 {
     public class AuthorRepository : BaseRepository<Author>, IAuthorRepository
     {

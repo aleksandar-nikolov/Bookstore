@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Blazored.Toast;
-using Bookstore_UI.Contracts;
+using BookStore_UI.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -13,12 +13,11 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Bookstore_UI.Data;
-using Bookstore_UI.Providers;
-using Bookstore_UI.Services;
+using BookStore_UI.Providers;
+using BookStore_UI.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace Bookstore_UI
+namespace BookStore_UI
 {
     public class Startup
     {

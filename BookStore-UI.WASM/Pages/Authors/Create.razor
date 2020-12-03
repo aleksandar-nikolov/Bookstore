@@ -1,0 +1,74 @@
+﻿@page "/authors/create/"
+
+@attribute [Authorize(Roles = "Administrator")]
+@inject IAuthorRepository _repo
+@inject NavigationManager _navMan
+@inject IToastService _toastService
+
+<h3 class="card-title">Create Author</h3>
+<hr/>
+@if (_isFailed)
+{
+    <div class="alert alert-danger">
+        <p>Something went wrong</p>
+    </div>
+}
+
+@if (Model == null)
+{
+    <LoadingMessage Message="Loading" />
+}
+else
+{
+    <EditForm Model="@Model" OnValidSubmit="CreateAuthor">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <InputText @bind-Value="Model.Firstname" class="form-control" id="firstname" />
+        </div>
+        <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <InputText @bind-Value="Model.Lastname" class="form-control" id="lastname" />
+        </div>
+        <div class="form-group">
+            <label for="Bio">Biography</label>
+            <InputText @bind-Value="Model.Bio" class="form-control" id="bio" />
+        </div>
+        <button class="btn btn-primary" type="submit">
+            <span class="oi oi-pencil"></span>
+            Submit Changes
+        </button>
+        <button class="btn btn-secondary" @onclick="BackToList">
+            <span class="oi oi-media-skip-backward">Back to list</span>
+        </button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private Author Model = new Author();
+
+    private bool _isFailed = false;
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/authors/");
+    }
+
+    private async Task CreateAuthor()
+    {
+        bool isSuccess = await _repo.Create($"{Endpoints.AuthorsEndpoint}", Model);
+        if (!isSuccess)
+        {
+            _isFailed = true;
+        }
+        else
+        {
+            _toastService.ShowSuccess("Author added!");
+            _navMan.NavigateTo("/authors/");
+        }
+    }
+}
