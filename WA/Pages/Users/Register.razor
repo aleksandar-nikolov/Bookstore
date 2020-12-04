@@ -1,0 +1,57 @@
+﻿@page "/Register"
+@using WA.Contracts
+@using WA.Models
+
+@inject IAuthenticationRepository _authenticationRepository
+@inject NavigationManager _navigationManager
+
+<div class="card">
+    <h3 class="card-title">Register Now</h3>
+    @if (_isFailed)
+    {
+        <div class="alert alert-danger">
+            <p>Something went wrong</p>
+        </div>
+    }
+    <div class="card-body">
+        <EditForm Model="_registrationModel" OnValidSubmit="HandleRegistration">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <InputText id="email" class="form-control" @bind-Value="_registrationModel.EmailAddress" />
+                <ValidationMessage For="@(() => _registrationModel.EmailAddress)" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <InputText id="password" type="password" class="form-control" @bind-Value="_registrationModel.Password" />
+                <ValidationMessage For="@(() => _registrationModel.Password)" />
+            </div>
+            <div class="form-group">
+                <label for="confirmpassword">Confirm Password</label>
+                <InputText id="confirmpassword" type="password" class="form-control" @bind-Value="_registrationModel.ConfirmPassword" />
+                <ValidationMessage For="@(() => _registrationModel.ConfirmPassword)" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+    private readonly RegistrationModel _registrationModel = new RegistrationModel();
+    private bool _isFailed = false;
+
+    private async Task HandleRegistration()
+    {
+        var response = await _authenticationRepository.Register(_registrationModel);
+        if (response)
+        {
+            _navigationManager.NavigateTo("/login");
+        }
+        else
+        {
+            _isFailed = true;
+        }
+    }
+}
