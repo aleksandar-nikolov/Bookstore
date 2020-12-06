@@ -8,11 +8,11 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using BookStore_UI.WASM.Contracts;
-using BookStore_UI.WASM.Static;
+using WA_NonPA.Contracts;
+using WA_NonPA.Static;
 using Newtonsoft.Json;
 
-namespace BookStore_UI.WASM.Services
+namespace WA_NonPA.Services
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
@@ -65,14 +65,21 @@ namespace BookStore_UI.WASM.Services
 
         public async Task<bool> Create(string url, T obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            //VALID
+            //var request = new HttpRequestMessage(HttpMethod.Post, url);
 
-            //TODO : all the others
+            //if (obj == null)
+            //{
+            //    return false;
+            //}
+
+            //request.Content = new StringContent(JsonConvert.SerializeObject(obj), UsedEncoding, MediaType);
+
             var client = await GetAuthenticatedClient();
+            //HttpResponseMessage response = await client.SendAsync(request);
+
             HttpResponseMessage response = await client.PostAsJsonAsync<T>(url, obj);
+
             if (response.StatusCode == HttpStatusCode.Created)
             {
                 return true;

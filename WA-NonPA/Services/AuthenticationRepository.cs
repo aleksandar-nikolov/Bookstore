@@ -7,14 +7,14 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using BookStore_UI.WASM.Contracts;
-using BookStore_UI.WASM.Models;
-using BookStore_UI.WASM.Providers;
-using BookStore_UI.WASM.Static;
+using WA_NonPA.Contracts;
+using WA_NonPA.Models;
+using WA_NonPA.Providers;
+using WA_NonPA.Static;
 using Microsoft.AspNetCore.Components.Authorization;
 using Newtonsoft.Json;
 
-namespace BookStore_UI.WASM.Services
+namespace WA_NonPA.Services
 {
     public class AuthenticationRepository : IAuthenticationRepository
     {

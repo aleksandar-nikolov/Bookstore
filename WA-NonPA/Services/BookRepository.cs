@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using BookStore_UI.WASM.Contracts;
-using BookStore_UI.WASM.Models;
+using WA_NonPA.Contracts;
+using WA_NonPA.Models;
 
-namespace BookStore_UI.WASM.Services
+namespace WA_NonPA.Services
 {
     public class BookRepository : BaseRepository<Book>, IBookRepository
     {

@@ -1,9 +1,9 @@
 ﻿using System.Net.Http;
 using Blazored.LocalStorage;
-using BookStore_UI.WASM.Contracts;
-using BookStore_UI.WASM.Models;
+using WA_NonPA.Contracts;
+using WA_NonPA.Models;
 
-namespace BookStore_UI.WASM.Services
+namespace WA_NonPA.Services
 {
     public class AuthorRepository : BaseRepository<Author>, IAuthorRepository
     {
