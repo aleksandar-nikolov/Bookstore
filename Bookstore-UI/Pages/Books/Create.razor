@@ -1,6 +1,7 @@
 ﻿@page "/books/create/"
 @using System.IO
 @using BookStore_UI.Static
+@using Newtonsoft.Json.Serialization
 @attribute [Authorize(Roles = "Administrator, Customer")]
 @inject IBookRepository _repo
 @inject IAuthorRepository _authorRepo
@@ -124,7 +125,10 @@ else
             var picName = $"{picId}{ext}";
 
             Model.Image = picName;
+            // One way
             await _fileUpload.UploadFile(_file.OpenReadStream(), picName);
+            //Other way
+            //Model.File = ...
         }
 
         bool isSuccess = await _repo.Create($"{Endpoints.BooksEndpoint}", Model);

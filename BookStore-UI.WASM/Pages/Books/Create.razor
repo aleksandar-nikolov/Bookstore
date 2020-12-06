@@ -100,6 +100,7 @@ else
     private bool _isFailed = false;
 
     private bool _isInvalidFileType = false;
+    private string _base64ImageRepresentation;
 
     protected override async Task OnInitializedAsync()
     {
@@ -126,7 +127,7 @@ else
             var picName = $"{picId}{ext}";
 
             Model.Image = picName;
-            await _fileUpload.UploadFile(_file.OpenReadStream(), picName);
+            Model.File = _base64ImageRepresentation;
         }
 
         bool isSuccess = await _repo.Create($"{Endpoints.BooksEndpoint}", Model);
@@ -147,9 +148,10 @@ else
         if (_file != null)
         {
             var name = _file.Name;
-            if (Path.GetExtension(name).ToLower() == "jpg" ||
-            Path.GetExtension(name).ToLower() == "jpeg" ||
-            Path.GetExtension(name).ToLower() == "png")
+            var ext = Path.GetExtension(name);
+            if (ext.ToLower() == "jpg" ||
+            ext.ToLower() == "jpeg" ||
+            ext.ToLower() == "png")
             {
                 try
                 {
@@ -158,8 +160,8 @@ else
                     var buffer = new byte[resizedImageFile.Size];
                     await resizedImageFile.OpenReadStream().ReadAsync(buffer);
 
-                    string base64ImageRepresentation = Convert.ToBase64String(buffer);
-                    _imageDataUrl = $"data:image/png;base64,{base64ImageRepresentation}";
+                    _base64ImageRepresentation = Convert.ToBase64String(buffer);
+                    _imageDataUrl = $"data:image/png;base64,{_base64ImageRepresentation}";
 
                     _isInvalidFileType = false;
                 }

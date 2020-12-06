@@ -15,6 +15,7 @@ namespace BookStore_API.Mappings.DTOs
         public string Summary { get; set; }
         public string Image { get; set; }
         public double Price { get; set; }
+        public string File { get; set; }
 
         public int? AuthorId { get; set; }
         public virtual AuthorDTO Author { get; set; }
@@ -31,6 +32,7 @@ namespace BookStore_API.Mappings.DTOs
         public string Summary { get; set; }
         public string Image { get; set; }
         public double? Price { get; set; }
+        public string File { get; set; }
 
         [Required]
         public int? AuthorId { get; set; }
@@ -46,6 +48,7 @@ namespace BookStore_API.Mappings.DTOs
         public string Summary { get; set; }
         public string Image { get; set; }
         public double? Price { get; set; }
+        public string File { get; set; }
         [Required]
         public string Isbn { get; set; }
         [Required]
