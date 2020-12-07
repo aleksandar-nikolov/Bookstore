@@ -64,7 +64,7 @@ namespace BookStore_API
 
             services.AddCors(_ =>
             {
-                _.AddPolicy(CorsPolicy, builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
+                _.AddPolicy(CorsPolicy, builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
 
             services.AddSwaggerGen(_ =>
