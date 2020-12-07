@@ -1,13 +1,11 @@
-﻿@page "/books/view/{id}"
-@using BookStore_UI.WASM.Contracts
-@using BookStore_UI.WASM.Models
-@using BookStore_UI.WASM.Static
-@attribute [Authorize]
+﻿@page "/books/delete/{id}"
 
+@attribute [Authorize]
+@inject IFileUpload _fileUpload
 @inject IBookRepository _repo
 @inject NavigationManager _navMan
 
-<h3>View book details</h3>
+<h3>Delete book</h3>
 
 @if (!int.TryParse(Id, out int id) || id < 1)
 {
@@ -15,11 +13,15 @@
 }
 else if (Model == null)
 {
-    <LoadingMessage Message="Loading book details"/>
+    <LoadingMessage Message="Loading book details" />
 }
 else
 {
     <div class="col-6">
+        @if (_isFailed)
+        {
+            <ErrorMessage Message="Problem deleting the book" />
+        }
         <h4>Book Details</h4>
         <table class="table table-responsive">
             <tr>
@@ -64,7 +66,7 @@ else
         </table>
     </div>
     <div class="col-4">
-        <img src="@string.Format("data:image/png;base64,{0}", Model.File)" style="width: 300px;height: 300px"/>
+        <img src="uploads/@Model.Image" style="width: 300px;height: 300px" />
         <h3 class="text-center text-info">@Model.Price</h3>
     </div>
 }
@@ -72,16 +74,19 @@ else
 <a href="/books/" class="btn btn-secondary">
     <span class="oi oi-media-skip-backward">Back to list</span>
 </a>
-<а href="/books/edit/@Model.Id" class="btn btn-secondary">
-    <span class="oi oi-pencil">Edit</span>
-</а>
+<button class="btn btn-secondary btn-danger" @onclick="DeleteAuthor">
+    <span class="oi oi-pencil">Delete</span>
+</button>
 
 
 @code {
+
     [Parameter]
     public string Id { get; set; }
 
     private Book Model = new Book();
+
+    private bool _isFailed = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -89,9 +94,18 @@ else
         Model = await _repo.Get(Endpoints.BooksEndpoint, id);
     }
 
-    private void Edit()
+    private async Task DeleteAuthor()
     {
-        _navMan.NavigateTo($"/books/edit/{Id}");
-    }
 
+        bool isSuccess = await _repo.Delete(Endpoints.BooksEndpoint, Model.Id);
+        if (!isSuccess)
+        {
+            _isFailed = true;
+        }
+        else
+        {
+            _fileUpload.RemoveFile(Model.Image);
+            _navMan.NavigateTo("/books/");
+        }
+    }
 }

@@ -20,6 +20,13 @@ namespace BookStore_API.Services
             return await Db.Books.AnyAsync(_ => _.Id == id);
         }
 
+        public async Task<string> GetImageFileName(int id)
+        {
+            // NOTE : as no tracking
+            var book = await Db.Books.AsNoTracking().FirstOrDefaultAsync(b => b.Id == id);
+            return book.Image;
+        }
+
         public new async Task<IList<Book>> FindAll()
         {
             var entities = await Db.Set<Book>().Include(b => b.Author).ToListAsync();

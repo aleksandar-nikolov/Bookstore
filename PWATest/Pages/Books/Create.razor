@@ -1,12 +1,10 @@
 ﻿@page "/books/create/"
 @using System.IO
-@using BookStore_UI.WASM.Contracts
-@using BookStore_UI.WASM.Models
-@using BookStore_UI.WASM.Static
 @attribute [Authorize(Roles = "Administrator, Customer")]
 @inject IBookRepository _repo
 @inject IAuthorRepository _authorRepo
 @inject NavigationManager _navMan
+@inject IFileUpload _fileUpload
 
 <h3 class="card-title">Create Book</h3>
 <hr/>
@@ -126,16 +124,7 @@ else
             var picName = $"{picId}{ext}";
 
             Model.Image = picName;
-
-            var resizedImageFile = await _file.RequestImageFileAsync("image/png", 1000, 1000);
-
-            var buffer = new byte[resizedImageFile.Size];
-            await resizedImageFile.OpenReadStream().ReadAsync(buffer);
-
-            var base64ImageRepresentationBig = Convert.ToBase64String(buffer);
-            var imageDataUrlBig = $"data:image/png;base64,{base64ImageRepresentationBig}";
-
-            Model.File = base64ImageRepresentationBig;
+            Model.File = _base64ImageRepresentation;
         }
 
         bool isSuccess = await _repo.Create($"{Endpoints.BooksEndpoint}", Model);

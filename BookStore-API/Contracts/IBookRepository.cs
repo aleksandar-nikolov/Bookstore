@@ -9,5 +9,6 @@ namespace BookStore_API.Contracts
     public interface IBookRepository : IRepositoryBase<Book>
     {
         Task<bool> DoesExist(int id);
+        public Task<string> GetImageFileName(int id);
     }
 }

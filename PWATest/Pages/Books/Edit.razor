@@ -1,14 +1,12 @@
 ﻿@page "/books/edit/{id}"
 @using System.IO
-@using BookStore_UI.WASM.Contracts
-@using BookStore_UI.WASM.Models
-@using BookStore_UI.WASM.Static
 @*@attribute [Authorize(Roles = "Administrator")]*@
 @attribute [Authorize(Roles = "Administrator, Customer")]
 
 @inject IBookRepository _repo
 @inject IAuthorRepository _authorRepo
 @inject NavigationManager _navMan
+@inject IFileUpload _fileUpload
 
 <h3 class="card-title">Edit Book</h3>
 <hr />
@@ -135,12 +133,14 @@ else
             var picId = Guid.NewGuid().ToString().Replace("-", string.Empty);
             var picName = $"{picId}{ext}";
 
+            _fileUpload.RemoveFile(Model.Image);
+
             Model.Image = picName;
-            //TODO
-            //Model.File = Convert.ToBase64String(this._file.)
+            await _fileUpload.UploadFile(_file.OpenReadStream(), picName);
         }
         else if (_isFileChanged)
         {
+            _fileUpload.RemoveFile(Model.Image);
             Model.Image = string.Empty;
         }
 
@@ -176,8 +176,11 @@ else
                     await resizedImageFile.OpenReadStream().ReadAsync(buffer);
 
                     string base64ImageRepresentation = Convert.ToBase64String(buffer);
+                    _imageDataUrl = $"data:image/png;base64,{base64ImageRepresentation}";
 
                     _isInvalidFileType = false;
+
+                    _fileUpload.RemoveFile(Model.Image);
                 }
                 catch
                 {

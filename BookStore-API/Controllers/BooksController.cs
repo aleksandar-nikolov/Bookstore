@@ -46,6 +46,7 @@ namespace BookStore_API.Controllers
             {
                 var books = await _bookRepository.FindAll();
                 var booksDto = Mapper.Map<IList<BookDTO>>(books);
+                //TODO : foreach consttruct image
                 return Ok(booksDto);
             }
             catch (Exception e)
@@ -79,12 +80,26 @@ namespace BookStore_API.Controllers
                 }
 
                 var bookDto = Mapper.Map<BookDTO>(book);
+                if (!string.IsNullOrWhiteSpace(bookDto.Image))
+                {
+                    var imgPath = GetImagePath(bookDto.Image);
+                    if(System.IO.File.Exists(imgPath))
+                    {
+                        byte[] imgBytes = System.IO.File.ReadAllBytes(imgPath);
+                        bookDto.File = Convert.ToBase64String(imgBytes);
+                    }
+                }
                 return Ok(bookDto);
             }
             catch (Exception e)
             {
                 return GetInternalError(e);
             }
+        }
+
+        private string? GetImagePath(string bookDtoImage)
+        {
+            return $"{_env.ContentRootPath}\\uploads\\{bookDtoImage}";
         }
 
         /// <summary>
@@ -134,7 +149,7 @@ namespace BookStore_API.Controllers
         {
             if (!string.IsNullOrWhiteSpace(bookDto.File))
             {
-                var imgPath = $"{_env.ContentRootPath}\\uploads\\{bookDto.Image}";
+                var imgPath = GetImagePath(bookDto.Image);
                 byte[] imageBytes = Convert.FromBase64String(bookDto.File);
                 await System.IO.File.WriteAllBytesAsync(imgPath, imageBytes);
             }
@@ -173,12 +188,41 @@ namespace BookStore_API.Controllers
                     return BadRequest(ModelState);
                 }
 
+                var oldImageFileName = await _bookRepository.GetImageFileName(id);
                 var book = Mapper.Map<Book>(bookDto);
                 var success = await _bookRepository.Update(book);
 
                 if (!success)
                 {
-                    Logger.LogWarn($"{GetActionInfo()} - could not update the book with id: {id}");
+                    return GetInternalError($"could not update the book with id: {id}");
+                }
+
+                if (!bookDto.Image.Equals(oldImageFileName))
+                {
+                    if (System.IO.File.Exists(GetImagePath(oldImageFileName)))
+                    {
+                        try
+                        {
+                            System.IO.File.Delete(GetImagePath(oldImageFileName));
+                        }
+                        catch
+                        {
+                            //TODO Log
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(bookDto.File))
+                {
+                    byte[] imageAsBytes = Convert.FromBase64String(bookDto.File);
+                    try
+                    {
+                        System.IO.File.WriteAllBytes(GetImagePath(bookDto.File), imageAsBytes);
+                    }
+                    catch
+                    {
+                        //TODO Log
+                    }
                 }
 
                 return NoContent();
@@ -223,6 +267,18 @@ namespace BookStore_API.Controllers
                 if (!success)
                 {
                     return GetInternalError($"{GetActionInfo()} - Could not delete book with id: {id}");
+                }
+
+                if (!string.IsNullOrWhiteSpace(bookToDelete.Image))
+                {
+                    try
+                    {
+                        System.IO.File.Delete(GetImagePath(bookToDelete.Image));
+                    }
+                    catch
+                    {
+                        //TODO Log
+                    }
                 }
 
                 return NoContent();

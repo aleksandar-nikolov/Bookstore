@@ -4,7 +4,6 @@
 @using BookStore_UI.WASM.Models
 @using BookStore_UI.WASM.Static
 @attribute [Authorize]
-@inject IFileUpload _fileUpload
 @inject IBookRepository _repo
 @inject NavigationManager _navMan
 
@@ -107,7 +106,6 @@ else
         }
         else
         {
-            _fileUpload.RemoveFile(Model.Image);
             _navMan.NavigateTo("/books/");
         }
     }
